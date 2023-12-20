@@ -1,0 +1,47 @@
+@import 'fonts';
+
+.container{
+    max-width: 1120px;
+}
+
+.header{
+    font-family: $montserratBold;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #5C6A79;
+}
+
+.header__navigation{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__links{
+    list-style: none;
+    display: flex;
+    gap: 4em;
+    text-transform: uppercase;
+}
+
+.header__link_item{
+    text-decoration: none;
+    color: inherit;
+}
+
+.header__link_item:hover,
+.header__link_item:active,
+.header__link_item:focus{
+    color: #1C2A39;
+}
+
+.header__active{
+    color: #1C2A39;
+}
+
+.header__icons{
+    list-style: none;
+    display: flex;
+    gap: 4em;
+}

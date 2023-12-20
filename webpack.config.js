@@ -14,6 +14,9 @@ module.exports = {
     },
     compress: true,
     port: 9000,
+    watchFiles: [
+    path.resolve(__dirname, 'src'), 
+  ],
   },
   mode: 'production',
   plugins: [new MiniCssExtractPlugin()],
