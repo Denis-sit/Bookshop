@@ -1,6 +1,16 @@
 @import 'fonts';
 
 .slider__container{
-    max-width: 1120px;
-    max-height: 702px;
+    overflow: hidden;
+}
+
+.slider__tape{
+    display: flex;
+    width: 3360px;
+    height: 702px;
+}
+
+.slider__tape img{
+    width: 1120px;
+    height: 702px;
 }
