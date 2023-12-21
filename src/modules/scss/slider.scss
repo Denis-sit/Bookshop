@@ -1,5 +1,12 @@
 @import 'fonts';
 
+.slider{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
 .slider__container{
     overflow: hidden;
 }
@@ -13,4 +20,60 @@
 .slider__tape img{
     width: 1120px;
     height: 702px;
+}
+
+.slider__card-link_violet,
+.slider__card-link_pink{
+    position: absolute;
+    display: flex;
+    align-items: end;
+    font-family: $montserratBold;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    color: #1c2a39;
+    background-image: url("/src/image/slider/arrow.svg");
+    background-repeat: no-repeat;
+    text-decoration: none;
+}
+
+.slider__card-link_violet{
+    width: 109px;
+    height: 66px;
+    padding: 102px 20px 36px 20px;
+    background-color: #9E98DC;
+    top: 78px;
+    right: -91px;
+    background-position: bottom 19px left 20px;
+}
+
+.slider__card-link_pink{
+    width: 68px;
+    height: 88px;
+    padding: 149px 47px 36px 21px;
+    background-color: #FF8FE6;
+    bottom: 100px;
+    right: -160px;
+    background-position: bottom 19px left 21px;
+}
+
+.header__control-panel{
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.header__dot-button{
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    border: none;
+    background: #EFEEF6;
+    cursor: pointer;
+}
+
+.header__dot-button_active{
+    background: #9E98DC;
 }
