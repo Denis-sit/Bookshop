@@ -2,7 +2,7 @@
 
 :root{
     font-size: 10px;
-    box-sizing: border-box;
+    box-sizing:border-box;
 }
 
 .container{
@@ -74,4 +74,20 @@
 
 .header__img:hover{
     scale: 1.5;
+}
+
+@media (max-width: 1024px){
+    body{
+        margin: 0;
+    }
+
+    .container{
+        padding: 0 30px;
+        box-sizing: border-box;
+    }
+
+    .header__navigation{
+        width: 900px;
+        margin: 0 auto;
+    }
 }

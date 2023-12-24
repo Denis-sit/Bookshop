@@ -74,3 +74,17 @@
     color: #EFEEF6;
     background: #4C3DB2;
 }
+
+@media (max-width: 1024px){
+    .book-list__menu{
+        width: 316px;
+    }
+
+    .book-list__menu ul{
+        padding-left: 55px;
+    }
+
+    .book-list__content {
+        justify-content: center;
+    }
+}

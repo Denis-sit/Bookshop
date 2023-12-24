@@ -77,3 +77,23 @@
 .header__dot-button_active{
     background: #9E98DC;
 }
+
+@media (max-width: 1024px){
+    .slider{
+        align-items: center;
+    }
+
+    .slider__container{
+        width: 900px;
+    }
+
+    .slider__tape{
+        height: 600px;
+        width: 1800px;
+    }
+
+    .slider__tape img{
+        width: 900px;
+        height: 600px;
+    }
+}
