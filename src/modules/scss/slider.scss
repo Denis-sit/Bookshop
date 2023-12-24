@@ -20,6 +20,7 @@
 .slider__tape img{
     width: 1120px;
     height: 702px;
+    flex-shrink: 0;
 }
 
 .slider__card-link_violet,
@@ -89,11 +90,118 @@
 
     .slider__tape{
         height: 600px;
-        width: 1800px;
+        width: 2700px;
     }
 
     .slider__tape img{
         width: 900px;
         height: 600px;
     }
+
 }
+
+@media (max-width: 768px){
+    .slider__container{
+        width: 700px;
+    }
+
+    .slider__tape{
+        width: 2100px;
+        height: 400px;
+    }
+
+    .slider__tape img{
+        width: 700px;
+        height: 400px;
+    }
+
+    .slider__card-link_violet,
+    .slider__card-link_pink{
+        padding-top: 15px;
+        padding-left: 5px;
+        font-size: 14px;
+        width: auto;
+    }
+
+    .slider__card-link_violet{
+        top: 115px;
+    }
+
+    .slider__card-link_pink{
+        top: 345px;
+    }
+}
+
+@media (max-width: 425px){
+    .slider__container{
+        width: 370px;
+    }
+
+    .slider__tape{
+        width: 1110px;
+        height: 170px;
+    }
+
+    .slider__tape img{
+        height: 170px;
+        width: 370px;
+    }
+
+    .slider__card-link_violet,
+    .slider__card-link_pink{
+        background-size: 40%;
+        padding: 5px 5px 10px;
+        font-size: 8px;
+        box-sizing: border-box;
+    }
+
+    .slider__card-link_violet{
+        background-position-x: 6px;
+        background-position-y: 41px;
+        height: 50px;
+        top: 93px;
+        right: 20px;
+    }
+
+    .slider__card-link_pink{
+        background-position-x: 6px;
+        background-position-y: 65px;
+        font-size: 8px;
+        height: 60px;
+        top: 180px;
+    }
+
+    .header__dot-button_active {
+        height: 12px;
+        width: 12px;
+    }
+}
+
+@media(max-width:375px){
+    .slider__container{
+        width: 340px;
+    }
+
+    .slider__tape{
+        width: 1020px;
+    }
+
+    .slider__tape img{
+        width: 340px;
+    }
+}
+
+@media(max-width:320px){
+    .slider__container{
+        width: 280px;
+    }
+    
+    .slider__tape{
+        width: 840px;
+    }
+
+    .slider__tape img{
+        width: 280px;
+    }
+}
+

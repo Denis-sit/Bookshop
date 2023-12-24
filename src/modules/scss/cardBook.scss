@@ -66,3 +66,62 @@
     color: #EFEEF6;
     background: #4C3DB2;
 }
+
+.book-card__description{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    height: 42px;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+}
+
+@media (max-width: 425px){
+    .book-list__content{
+        margin-left: 0;
+        align-self: flex-end;
+    }
+
+    .book-card{
+        gap: 10px;
+    }
+
+    .book-card img{
+        width: 159px;
+        height: 258px;
+    }
+
+    .book-card__info{
+        padding-top: 10px;
+    }
+}
+
+@media(max-width: 375px){
+    .book-list__content{
+        align-self: baseline;
+    }
+
+    .book-card__info,
+    .book-card__button{
+        width: 150px;
+    }
+}
+
+@media(max-width: 320px){
+    .book-list__content{
+        align-self: flex-end;
+    }
+
+    .card__info{
+        width: 120px;
+        padding: 0;
+    }
+
+    .book-card__name{
+        margin: 3px 0;
+    }
+
+    .book-card__button,
+    .book-card__info{
+        width: 120px;
+    }
+}

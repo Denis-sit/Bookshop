@@ -42,6 +42,10 @@
     color: #1C2A39;
 }
 
+.header__menu-mob{
+    display: none;
+}
+
 .header__links{
     font-family: $montserratBlack;
     list-style: none;
@@ -89,5 +93,62 @@
     .header__navigation{
         width: 900px;
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 1024px){
+    .header__navigation{
+        width: 700px;
+    }
+}
+
+@media (max-width: 425px){
+    .header__navigation{
+        width: 370px;
+    }
+
+    .header__logo_text{
+        font-size: 14px;
+    }
+
+    .header__links{
+        flex-direction: column;
+        gap: 5px;
+        font-size: 8px;
+        display: none;
+    }
+
+    .header__icons{
+        gap: 10px;
+    }
+
+    .slider__container{
+        width: 370px;
+    }
+
+    .header__menu-mob{
+        display: block;
+    }
+    
+    .header__menu-mob:hover{
+        .header__links{
+            display: flex;
+        }
+    }
+}
+
+@media(max-width:375px){
+    .header__navigation{
+        width: 340px;
+    }
+}
+
+@media(max-width:320px){
+    .container{
+        padding: 0 10px;
+    }
+    
+    .header__navigation{
+        width: 280px;
     }
 }

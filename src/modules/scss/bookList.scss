@@ -88,3 +88,41 @@
         justify-content: center;
     }
 }
+
+@media (max-width: 768px){
+    .book-list__menu ul{
+        padding-left: 27px;
+    }
+}
+
+@media (max-width: 425px){
+    .book-list{
+        margin-top: 50px;
+    }
+
+    .book-list__menu{
+        height: auto;
+        position: relative;
+        width: auto;
+        border-radius: 16px;
+    }
+
+    .book-list__menu ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .active{
+        list-style: none;
+    }
+
+    .book-list__button{
+        font-size: 10px;
+        height: 15px;
+    }
+
+    .book-list__load{
+        margin-left: 0;
+    }
+}
+
