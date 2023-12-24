@@ -2,20 +2,18 @@
 
 .book-list{
     margin-top: 105px;
-    position: relative;
     margin-top: 105px;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .book-list__menu{
+    background: #efeef6;
+    height: 710px;
+    left: 0;
     position: absolute;
     width: 416px;
-    height: 710px;
-    background: #EFEEF6;
-    left: -174px;
 }
 
 .book-list__menu ul{
@@ -23,14 +21,14 @@
     flex-direction: column;
     list-style: none;
     gap: 7px;
-    color: var(--text-gray, #5C6A79);
+    color: #5C6A79;
     font-family: $montserratMedium;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-transform: capitalize;
-    padding: 28px 23px 32px 162px;
+    padding: 28px 23px 32px 152px;
 }
 
 .book-list__button{
@@ -68,6 +66,8 @@
     cursor: pointer;
     margin-bottom: 40px;
     margin-top: 84px;
+    align-self: center;
+    margin-left: 217px;
 }
 
 .book-list__load:hover{
