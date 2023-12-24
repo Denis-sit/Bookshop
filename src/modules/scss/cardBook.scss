@@ -1,0 +1,68 @@
+@import 'fonts';
+
+.book-list__content{
+    position: relative;
+    display: flex;
+    gap: 72px;
+    flex-wrap: wrap;
+    z-index: 1;
+    align-self: flex-start;
+    margin-left: 200px;
+    margin-top: 40px;
+}
+
+.book-card{
+    display: flex;
+    gap: 36px;
+    font-family: $openSans;
+    color: #5C6A79;
+    text-transform: capitalize;
+}
+
+.book-card__info{
+    width: 176px;
+    padding-top: 70px;
+    font-size: 10px;
+}
+
+.book-card__name{
+    font-family: $montserratBold;
+    font-size: 16px;
+    text-transform: none;
+}
+
+.book-card__rating{
+    display: flex;
+    gap: 6px;
+    font-size: 10px;
+}
+
+.book-card__star{
+    font-size: 20px;
+}
+
+.book-card__price{
+    font-family: $montserratBold;
+    font-size: 13px;
+    color: #1C2A39;
+}
+
+.book-card__button{
+    width: 176px;
+    height: 45px;
+    border: 1px solid #4C3DB2;
+    background: transparent;
+    color: #4C3DB2;
+    font-family: $montserratBold;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.book-card__button:hover{
+    color: #EFEEF6;
+    background: #4C3DB2;
+}
