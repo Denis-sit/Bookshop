@@ -130,11 +130,10 @@
         display: block;
     }
     
-    .header__menu-mob:hover{
-        .header__links{
-            display: flex;
-        }
+    .header__links{
+        display: none;
     }
+    
 }
 
 @media(max-width:375px){
