@@ -58,8 +58,7 @@ function loadingBooks(category){
     });
 };
 
-export default function displayingContent(){
-
+function choosingACategory(){
     categoryBtn.forEach(item =>{
         item.addEventListener('click', (e) =>{
             e.preventDefault();
@@ -68,7 +67,7 @@ export default function displayingContent(){
                 item.classList.remove('book-list__button_active');
                 item.parentElement.style.listStyleType = 'none';
             })
-            
+
             item.classList.add('book-list__button_active');
             item.parentElement.style.listStyleType = 'disc';
             category = item.dataset.category;
@@ -76,7 +75,10 @@ export default function displayingContent(){
             requestingData(category);
         });
     });
-    
+}
+
+export default function displayingContent(){
+    choosingACategory();
     requestingData(category);
     loadingBooks(category); 
 }
