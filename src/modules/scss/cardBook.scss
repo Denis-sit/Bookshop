@@ -17,9 +17,17 @@
     font-family: $openSans;
     color: #5C6A79;
     text-transform: capitalize;
+    height: 330px;
+}
+
+.book-card img{
+    width: 198px;
 }
 
 .book-card__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 176px;
     padding-top: 70px;
     font-size: 10px;
@@ -29,6 +37,11 @@
     font-family: $montserratBold;
     font-size: 16px;
     text-transform: none;
+    margin: 0;
+}
+
+.book-card_author{
+    margin: 0;
 }
 
 .book-card__rating{
