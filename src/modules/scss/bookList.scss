@@ -49,11 +49,6 @@
     list-style-type: disc;
 }
 
-.active::marker{
-    color: #756AD3;
-    font-size: 21px;
-}
-
 .book-list__load{
     font-family: $montserratBold;
     text-transform: uppercase;

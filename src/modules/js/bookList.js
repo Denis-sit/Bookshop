@@ -1,22 +1,24 @@
-const apiKey = "AIzaSyDvIpoSKK0AQ3kbwdqvaIdvQzdqKtItLf0"; 
-const url = `https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=${apiKey}&printType=books&startIndex=0&maxResults=6&langRestrict=en`;
+const apiKey = "AIzaSyDvIpoSKK0AQ3kbwdqvaIdvQzdqKtItLf0";
 const parentContainer = document.querySelector('.book-list__content'),
-      loadingBtn = document.querySelector('.book-list__load');
+      loadingBtn = document.querySelector('.book-list__load'),
+      categoryBtn = document.querySelectorAll('.book-list__button');
+let category = 'Architecture';
 
 
-function requestingData(){
-    fetch(url)
+function requestingData(category){
+    fetch( `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&key=${apiKey}&printType=books&startIndex=0&maxResults=6&langRestrict=en`)
         .then(response => response.json())
         .then(data => renderContent(data.items))
         .catch(error => console.error('Error:', error))
 };
 
 function renderContent(data){
+    console.log(data);
     data.forEach((book, i) => {
         const info = book.volumeInfo;
         parentContainer.innerHTML += `
         <div class="book-card">
-            <img src=${info.imageLinks.smallThumbnail ? info.imageLinks.smallThumbnail : '../../image/book.svg'} alt="image">
+            <img src=${info.imageLinks ? info.imageLinks.smallThumbnail : 'src/image/book.svg'} alt="image">
             <div class="book-card__info">
                 <p class="book-card_author">${info.authors ? info.authors : ''}</p>
                 <p class="book-card__name">${info.title ? info.title : ''}</p>
@@ -44,14 +46,37 @@ function renderContent(data){
     });
 };
 
-function loadingBooks(){
+function loadingBooks(category){
     loadingBtn.addEventListener('click', (e) =>{
         e.preventDefault();
-        requestingData();
+        categoryBtn.forEach(item =>{
+            if(item.classList.contains('book-list__button_active')){
+                category = item.dataset.category;
+            }
+        })
+        requestingData(category);
     });
 };
 
 export default function displayingContent(){
-    requestingData();
-    loadingBooks();
+
+    categoryBtn.forEach(item =>{
+        item.addEventListener('click', (e) =>{
+            e.preventDefault();
+
+            categoryBtn.forEach(item =>{
+                item.classList.remove('book-list__button_active');
+                item.parentElement.style.listStyleType = 'none';
+            })
+            
+            item.classList.add('book-list__button_active');
+            item.parentElement.style.listStyleType = 'disc';
+            category = item.dataset.category;
+            parentContainer.innerHTML = '';
+            requestingData(category);
+        });
+    });
+    
+    requestingData(category);
+    loadingBooks(category); 
 }
