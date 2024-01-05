@@ -4,7 +4,9 @@ const parentContainer = document.querySelector('.book-list__content'),
       categoryBtn = document.querySelectorAll('.book-list__button'),
       containerPurchaseCounter = document.querySelector('.header__purchase-counter');
 let category = 'Architecture',
-    purchaseCounter = 0;
+    purchaseCounter = 0,
+    arrBook,
+    arrButton ;
 
 
 function requestingData(category){
@@ -42,46 +44,75 @@ function renderContent(data){
                 average.textContent += `☆`;
             }
             cardRating[i].prepend(average);
-        }
+        };
     });
     const btnBuy = document.querySelectorAll('.book-card__button');
-    addingToTheCart(btnBuy, data)
+    addingToTheCart(btnBuy, data);
+    let storedBook = JSON.parse(localStorage.getItem('book'));
+    applyingStylesToActiveButtons(btnBuy, storedBook);
+    purchaseCounter = storedBook.length > 0 ? storedBook.length : 0;
+    if(purchaseCounter){
+        containerPurchaseCounter.style.display = 'block';
+        containerPurchaseCounter.textContent = purchaseCounter;
+    }else{
+        containerPurchaseCounter.style.display = 'none';
+        containerPurchaseCounter.textContent = '';
+    };
+};
+
+function applyingStylesToActiveButtons(btns, storedBook){
+    if(storedBook){
+        btns.forEach(elem =>{
+            storedBook.forEach(item =>{
+                if( item && item.id === elem.dataset.id){
+                    elem.classList.add('book-card__button_active');
+                    elem.textContent = 'in the cart';
+                };
+            });
+        });
+    };
 };
 
 function addingToTheCart(btnBuy, book){
-    console.log(book);
     btnBuy.forEach((button, i) =>{
         button.addEventListener('click', (e) =>{
             e.preventDefault();
             button.classList.toggle('book-card__button_active');
+            let storedBook = localStorage.getItem('book');
+            let storeButton = localStorage.getItem('button');
             if(button.textContent === 'buy now'){
                 button.textContent = 'in the cart';
                 purchaseCounter++;
                 containerPurchaseCounter.style.display = 'block';
                 containerPurchaseCounter.textContent = purchaseCounter;
-                let storedBook = localStorage.getItem('book');
-                // let storeButton = localStorage.getItem('button');
                 if(storedBook){
-                    let arrBook = JSON.parse(storedBook);
-                    console.log(arrBook);
+                    arrBook = JSON.parse(storedBook);
                     arrBook.push(book[i]);
                     localStorage.setItem('book', JSON.stringify(arrBook));
 
-                    // let arrButton = JSON.parse(storeButton);
-                    // arrButton.push(button.dataset.id);
-                    // localStorage.setItem('button', JSON.stringify(arrButton));
+                    arrButton = JSON.parse(storeButton);
+                    arrButton.push(button.dataset.id);
+                    localStorage.setItem('button', JSON.stringify(arrButton));
+
                 }else{
-                    localStorage.setItem('book', JSON.stringify(book[i]));
-                    // localStorage.setItem('button', JSON.stringify(button.dataset.id));
+                    localStorage.setItem('book', JSON.stringify([book[i]]));
+                    localStorage.setItem('button', JSON.stringify([button.dataset.id]));
                 }
             }else{
                 button.textContent = 'buy now';
                 purchaseCounter--;
                 purchaseCounter > 0 ? containerPurchaseCounter.textContent = purchaseCounter : containerPurchaseCounter.style.display = 'none';
-                storedBook = localStorage.getItem('book');
-                console.log(storedBook);
+                if(storedBook){
+                    arrBook = JSON.parse(storedBook);
+                    let newArrBook = arrBook.filter(item => item.id !== button.dataset.id); 
+                    localStorage.setItem('book', JSON.stringify(newArrBook));  
+                    arrButton = JSON.parse(storeButton);
+                    let newArrButton = arrButton.filter(item => item !== button.dataset.id);
+                    localStorage.setItem('button', JSON.stringify(newArrButton));
+                    console.log(newArrButton);
+                }
             }
-        })
+        });
     });
 };
 
