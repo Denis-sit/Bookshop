@@ -1,8 +1,10 @@
 const apiKey = "AIzaSyDvIpoSKK0AQ3kbwdqvaIdvQzdqKtItLf0";
 const parentContainer = document.querySelector('.book-list__content'),
       loadingBtn = document.querySelector('.book-list__load'),
-      categoryBtn = document.querySelectorAll('.book-list__button');
-let category = 'Architecture';
+      categoryBtn = document.querySelectorAll('.book-list__button'),
+      containerPurchaseCounter = document.querySelector('.header__purchase-counter');
+let category = 'Architecture',
+    purchaseCounter = 0;
 
 
 function requestingData(category){
@@ -13,7 +15,6 @@ function requestingData(category){
 };
 
 function renderContent(data){
-    console.log(data);
     data.forEach((book, i) => {
         const info = book.volumeInfo;
         parentContainer.innerHTML += `
@@ -29,7 +30,7 @@ function renderContent(data){
                 <p class="book-card__description">${info.description ? info.description : ''}</p>
                 <p class="book-card__price">${book.saleInfo.retailPrice ? book.saleInfo.retailPrice.amount : ''}
                                             ${book.saleInfo.retailPrice ? book.saleInfo.retailPrice.currencyCode : ''}</p>
-                <button class="book-card__button">buy now</button>
+                <button class="book-card__button" data-id=${book.id}>buy now</button>
             </div>
         </div>
         `
@@ -42,7 +43,45 @@ function renderContent(data){
             }
             cardRating[i].prepend(average);
         }
-        
+    });
+    const btnBuy = document.querySelectorAll('.book-card__button');
+    addingToTheCart(btnBuy, data)
+};
+
+function addingToTheCart(btnBuy, book){
+    console.log(book);
+    btnBuy.forEach((button, i) =>{
+        button.addEventListener('click', (e) =>{
+            e.preventDefault();
+            button.classList.toggle('book-card__button_active');
+            if(button.textContent === 'buy now'){
+                button.textContent = 'in the cart';
+                purchaseCounter++;
+                containerPurchaseCounter.style.display = 'block';
+                containerPurchaseCounter.textContent = purchaseCounter;
+                let storedBook = localStorage.getItem('book');
+                // let storeButton = localStorage.getItem('button');
+                if(storedBook){
+                    let arrBook = JSON.parse(storedBook);
+                    console.log(arrBook);
+                    arrBook.push(book[i]);
+                    localStorage.setItem('book', JSON.stringify(arrBook));
+
+                    // let arrButton = JSON.parse(storeButton);
+                    // arrButton.push(button.dataset.id);
+                    // localStorage.setItem('button', JSON.stringify(arrButton));
+                }else{
+                    localStorage.setItem('book', JSON.stringify(book[i]));
+                    // localStorage.setItem('button', JSON.stringify(button.dataset.id));
+                }
+            }else{
+                button.textContent = 'buy now';
+                purchaseCounter--;
+                purchaseCounter > 0 ? containerPurchaseCounter.textContent = purchaseCounter : containerPurchaseCounter.style.display = 'none';
+                storedBook = localStorage.getItem('book');
+                console.log(storedBook);
+            }
+        })
     });
 };
 

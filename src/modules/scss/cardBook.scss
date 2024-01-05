@@ -80,6 +80,11 @@
     background: #4C3DB2;
 }
 
+.book-card__button_active{
+    border: 1px solid #EEEDF5;
+    color: #5C6A79;
+}
+
 .book-card__description{
     display: -webkit-box;
     -webkit-box-orient: vertical;

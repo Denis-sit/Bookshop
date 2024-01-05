@@ -76,6 +76,26 @@
     gap: 4em;
 }
 
+.header__purchase-counter{
+    position: absolute;
+    display: none;
+    font-family: 'Montserrat Medium';
+    color: #FFF;
+    text-align: center;
+    font-size: 10px;
+    width: 13px;
+    height: 13px;
+    background: #FF353A;
+    border-radius: 6px;
+    z-index: 1;
+    bottom: 0;
+    right: 2px;
+}
+
+.header__img-link:last-child{
+    position: relative;
+}
+
 .header__img:hover{
     scale: 1.5;
 }
