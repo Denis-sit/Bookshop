@@ -139,11 +139,11 @@ function choosingACategory(){
 
             categoryBtn.forEach(item =>{
                 item.classList.remove('book-list__button_active');
-                item.parentElement.style.listStyleType = 'none';
+                item.parentElement.classList.remove('active');
             })
 
             item.classList.add('book-list__button_active');
-            item.parentElement.style.listStyleType = 'disc';
+            item.parentElement.classList.add('active');
             category = item.dataset.category;
             parentContainer.innerHTML = '';
             requestingData(category);

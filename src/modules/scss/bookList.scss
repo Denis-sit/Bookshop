@@ -119,5 +119,16 @@
     .book-list__load{
         margin-left: 0;
     }
+
+    .book-list__button:hover,
+    .book-list__button_active{
+        color: #1C2A39;
+        font-family: $montserratBold;
+        font-size: 0.8rem;
+    }
+
+    .active{
+        list-style-type: none;
+    }
 }
 
