@@ -30,12 +30,12 @@
     justify-content: space-between;
     width: 176px;
     padding-top: 70px;
-    font-size: 10px;
+    font-size: 0.625rem;
 }
 
 .book-card__name{
     font-family: $montserratBold;
-    font-size: 16px;
+    font-size: 1rem;
     text-transform: none;
     margin: 0;
 }
@@ -47,16 +47,16 @@
 .book-card__rating{
     display: flex;
     gap: 6px;
-    font-size: 10px;
+    font-size: 0.625rem;
 }
 
 .book-card__star{
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .book-card__price{
     font-family: $montserratBold;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: #1C2A39;
 }
 
@@ -67,7 +67,7 @@
     background: transparent;
     color: #4C3DB2;
     font-family: $montserratBold;
-    font-size: 8px;
+    font-size: 0.5rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;

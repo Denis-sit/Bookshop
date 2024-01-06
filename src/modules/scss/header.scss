@@ -1,7 +1,10 @@
 @import 'fonts';
 
 :root{
-    font-size: 10px;
+    font-size: 1em;
+}
+
+*{
     box-sizing:border-box;
 }
 
@@ -22,7 +25,7 @@
 
 .header{
     font-family: $montserratBold;
-    font-size: 10px;
+    font-size: 0.625rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -38,7 +41,7 @@
 }
 
 .header__logo_text{
-    font-size: 24px;
+    font-size: 1.5rem;
     color: #1C2A39;
 }
 
@@ -50,7 +53,7 @@
     font-family: $montserratBlack;
     list-style: none;
     display: flex;
-    gap: 4em;
+    gap: 40px;
     text-transform: uppercase;
     font-weight: 900;
 }
@@ -73,7 +76,7 @@
 .header__icons{
     list-style: none;
     display: flex;
-    gap: 4em;
+    gap: 40px;
 }
 
 .header__purchase-counter{
@@ -82,7 +85,7 @@
     font-family: $montserratMedium;
     color: #FFF;
     text-align: center;
-    font-size: 10px;
+    font-size: 0.625rem;
     width: 13px;
     height: 13px;
     background: #FF353A;
