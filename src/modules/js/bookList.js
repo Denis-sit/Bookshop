@@ -16,6 +16,11 @@ function requestingData(category){
         .catch(error => console.error('Error:', error))
 };
 
+function hidingTheBlock(){
+    containerPurchaseCounter.style.display = 'block';
+    containerPurchaseCounter.textContent = purchaseCounter;
+}
+
 function renderContent(data){
     data.forEach((book, i) => {
         const info = book.volumeInfo;
@@ -52,8 +57,7 @@ function renderContent(data){
     applyingStylesToActiveButtons(btnBuy, storedBook);
     purchaseCounter = storedBook.length > 0 ? storedBook.length : 0;
     if(purchaseCounter){
-        containerPurchaseCounter.style.display = 'block';
-        containerPurchaseCounter.textContent = purchaseCounter;
+        hidingTheBlock();
     }else{
         containerPurchaseCounter.style.display = 'none';
         containerPurchaseCounter.textContent = '';
@@ -73,6 +77,18 @@ function applyingStylesToActiveButtons(btns, storedBook){
     };
 };
 
+function writingToTheLocalStorage(key, arr, storedData, info){
+    arr = JSON.parse(storedData);
+    arr.push(info);
+    localStorage.setItem(key , JSON.stringify(arr));
+};
+
+function filteringBooks(storedData, arr, id, key){
+    arr = JSON.parse(storedData);
+    let newArrBook = arr.filter(item => item.id ? item.id !== id : item !== id); 
+    localStorage.setItem(key, JSON.stringify(newArrBook));
+}
+
 function addingToTheCart(btnBuy, book){
     btnBuy.forEach((button, i) =>{
         button.addEventListener('click', (e) =>{
@@ -83,17 +99,10 @@ function addingToTheCart(btnBuy, book){
             if(button.textContent === 'buy now'){
                 button.textContent = 'in the cart';
                 purchaseCounter++;
-                containerPurchaseCounter.style.display = 'block';
-                containerPurchaseCounter.textContent = purchaseCounter;
+                hidingTheBlock();
                 if(storedBook){
-                    arrBook = JSON.parse(storedBook);
-                    arrBook.push(book[i]);
-                    localStorage.setItem('book', JSON.stringify(arrBook));
-
-                    arrButton = JSON.parse(storeButton);
-                    arrButton.push(button.dataset.id);
-                    localStorage.setItem('button', JSON.stringify(arrButton));
-
+                    writingToTheLocalStorage('book', arrBook, storedBook, book[i]);
+                    writingToTheLocalStorage('button', arrButton, storeButton, button.dataset.id);
                 }else{
                     localStorage.setItem('book', JSON.stringify([book[i]]));
                     localStorage.setItem('button', JSON.stringify([button.dataset.id]));
@@ -103,13 +112,8 @@ function addingToTheCart(btnBuy, book){
                 purchaseCounter--;
                 purchaseCounter > 0 ? containerPurchaseCounter.textContent = purchaseCounter : containerPurchaseCounter.style.display = 'none';
                 if(storedBook){
-                    arrBook = JSON.parse(storedBook);
-                    let newArrBook = arrBook.filter(item => item.id !== button.dataset.id); 
-                    localStorage.setItem('book', JSON.stringify(newArrBook));  
-                    arrButton = JSON.parse(storeButton);
-                    let newArrButton = arrButton.filter(item => item !== button.dataset.id);
-                    localStorage.setItem('button', JSON.stringify(newArrButton));
-                    console.log(newArrButton);
+                    filteringBooks(storedBook, arrBook, button.dataset.id, 'book');
+                    filteringBooks(storeButton, arrButton, button.dataset.id, 'button');
                 }
             }
         });
