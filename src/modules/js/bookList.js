@@ -65,7 +65,6 @@ function renderContent(data){
 };
 
 function applyingStylesToActiveButtons(btns, storedBook){
-    console.log(storedBook);
     if(storedBook){
         btns.forEach(elem =>{
             storedBook.forEach(item =>{
