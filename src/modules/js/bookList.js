@@ -55,7 +55,7 @@ function renderContent(data){
     addingToTheCart(btnBuy, data);
     let storedBook = JSON.parse(localStorage.getItem('book'));
     applyingStylesToActiveButtons(btnBuy, storedBook);
-    purchaseCounter = storedBook.length > 0 ? storedBook.length : 0;
+    purchaseCounter = storedBook && storedBook.length > 0 ? storedBook.length : 0;
     if(purchaseCounter){
         hidingTheBlock();
     }else{
@@ -65,6 +65,7 @@ function renderContent(data){
 };
 
 function applyingStylesToActiveButtons(btns, storedBook){
+    console.log(storedBook);
     if(storedBook){
         btns.forEach(elem =>{
             storedBook.forEach(item =>{
