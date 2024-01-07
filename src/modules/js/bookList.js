@@ -6,7 +6,8 @@ const parentContainer = document.querySelector('.book-list__content'),
 let category = 'Architecture',
     purchaseCounter = 0,
     arrBook,
-    arrButton ;
+    arrButton,
+    bookDatabase =[];
 
 
 function requestingData(category){
@@ -22,6 +23,7 @@ function hidingTheBlock(){
 }
 
 function renderContent(data){
+    bookDatabase = bookDatabase.concat(data);
     data.forEach((book, i) => {
         const info = book.volumeInfo;
         parentContainer.innerHTML += `
@@ -41,18 +43,25 @@ function renderContent(data){
             </div>
         </div>
         `
-        if(info.averageRating){
-            let cardRating = document.querySelectorAll('.book-card__rating')
+    });
+    
+    bookDatabase.forEach((item, i) =>{
+        if(item.volumeInfo.averageRating){
+            let cardRating = document.querySelectorAll('.book-card__rating');
             let average = document.createElement('div');
             average.classList.add('book-card__star');
-            for(let index = 1; index <= info.averageRating; index++){
-                average.textContent += `☆`;
-            }
-            cardRating[i].prepend(average);
+            let averageElement = document.querySelectorAll('book-card__star')
+            if(!averageElement[i]){
+                for(let index = 1; index <= item.volumeInfo.averageRating; index++){
+                    average.textContent += `☆`;
+                };
+                cardRating[i].prepend(average);
+            };
         };
-    });
+    })
+
     const btnBuy = document.querySelectorAll('.book-card__button');
-    addingToTheCart(btnBuy, data);
+    addingToTheCart(btnBuy, bookDatabase);
     let storedBook = JSON.parse(localStorage.getItem('book'));
     applyingStylesToActiveButtons(btnBuy, storedBook);
     purchaseCounter = storedBook && storedBook.length > 0 ? storedBook.length : 0;
@@ -94,6 +103,13 @@ function addingToTheCart(btnBuy, book){
         button.addEventListener('click', (e) =>{
             e.preventDefault();
             button.classList.toggle('book-card__button_active');
+            btnBuy.forEach(btn =>{
+                if(btn.dataset.id.toString() === button.dataset.id.toString() && button != btn){
+                    btn.classList.toggle('book-card__button_active');
+                    btn.textContent = btn.textContent === 'buy now'? btn.textContent = 'in the cart' : btn.textContent = 'buy now';
+                }
+            })
+
             let storedBook = localStorage.getItem('book');
             let storeButton = localStorage.getItem('button');
             if(button.textContent === 'buy now'){
