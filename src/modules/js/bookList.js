@@ -7,11 +7,12 @@ let category = 'Architecture',
     purchaseCounter = 0,
     arrBook,
     arrButton,
-    bookDatabase =[];
+    bookDatabase =[],
+    indexStart = 0;
 
 
 function requestingData(category){
-    fetch( `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&key=${apiKey}&printType=books&startIndex=0&maxResults=6&langRestrict=en`)
+    fetch( `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&key=${apiKey}&printType=books&startIndex=${indexStart}&maxResults=6&langRestrict=en&orderBy=newest`)
         .then(response => response.json())
         .then(data => renderContent(data.items))
         .catch(error => console.error('Error:', error))
@@ -24,7 +25,7 @@ function hidingTheBlock(){
 
 function renderContent(data){
     bookDatabase = bookDatabase.concat(data);
-    console.log(data);
+    localStorage.setItem('index' , JSON.stringify(bookDatabase.length));
     data.forEach(book => {
         const info = book.volumeInfo;
         parentContainer.innerHTML += `
@@ -143,7 +144,8 @@ function loadingBooks(category){
                 category = item.dataset.category;
             }
         })
-        requestingData(category);
+        indexStart = JSON.parse(localStorage.getItem('index'));
+        requestingData(category, indexStart);
     });
 };
 
