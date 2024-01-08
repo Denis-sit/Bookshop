@@ -24,7 +24,8 @@ function hidingTheBlock(){
 
 function renderContent(data){
     bookDatabase = bookDatabase.concat(data);
-    data.forEach((book, i) => {
+    console.log(data);
+    data.forEach(book => {
         const info = book.volumeInfo;
         parentContainer.innerHTML += `
         <div class="book-card">
@@ -33,6 +34,7 @@ function renderContent(data){
                 <p class="book-card_author">${info.authors ? info.authors : ''}</p>
                 <p class="book-card__name">${info.title ? info.title : ''}</p>
                 <div class="book-card__rating">
+                <p class="book-card__star">${generateStars(info.averageRating)}</p>
                     <p class="book-card__reviews">${info.ratingsCount ? info.ratingsCount : ''}
                                                   ${info.ratingsCount ? 'review' : ''}  </p>
                 </div>
@@ -45,20 +47,17 @@ function renderContent(data){
         `
     });
     
-    bookDatabase.forEach((item, i) =>{
-        if(item.volumeInfo.averageRating){
-            let cardRating = document.querySelectorAll('.book-card__rating');
-            let average = document.createElement('div');
-            average.classList.add('book-card__star');
-            let averageElement = document.querySelectorAll('book-card__star')
-            if(!averageElement[i]){
-                for(let index = 1; index <= item.volumeInfo.averageRating; index++){
-                    average.textContent += `☆`;
-                };
-                cardRating[i].prepend(average);
-            };
-        };
-    })
+    function generateStars(average) {
+        if (average) {
+            let stars = '';
+            for (let i = 1; i <= average; i++) {
+                stars += '☆';
+            }
+            return stars;
+        } else {
+            return '';
+        }
+    };
 
     const btnBuy = document.querySelectorAll('.book-card__button');
     addingToTheCart(btnBuy, bookDatabase);
