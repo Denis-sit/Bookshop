@@ -7,11 +7,12 @@ let category = 'Architecture',
     purchaseCounter = 0,
     arrBook,
     arrButton,
-    bookDatabase =[];
+    bookDatabase =[],
+    indexStart = 0;
 
 
 function requestingData(category){
-    fetch( `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&key=${apiKey}&printType=books&startIndex=0&maxResults=6&langRestrict=en`)
+    fetch( `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&key=${apiKey}&printType=books&startIndex=${indexStart}&maxResults=6&langRestrict=en&orderBy=newest`)
         .then(response => response.json())
         .then(data => renderContent(data.items))
         .catch(error => console.error('Error:', error))
@@ -20,11 +21,12 @@ function requestingData(category){
 function hidingTheBlock(){
     containerPurchaseCounter.style.display = 'block';
     containerPurchaseCounter.textContent = purchaseCounter;
-}
+};
 
 function renderContent(data){
     bookDatabase = bookDatabase.concat(data);
-    data.forEach((book, i) => {
+    localStorage.setItem('index' , JSON.stringify(bookDatabase.length));
+    data.forEach(book => {
         const info = book.volumeInfo;
         parentContainer.innerHTML += `
         <div class="book-card">
@@ -33,6 +35,7 @@ function renderContent(data){
                 <p class="book-card_author">${info.authors ? info.authors : ''}</p>
                 <p class="book-card__name">${info.title ? info.title : ''}</p>
                 <div class="book-card__rating">
+                <p class="book-card__star">${generateStars(info.averageRating)}</p>
                     <p class="book-card__reviews">${info.ratingsCount ? info.ratingsCount : ''}
                                                   ${info.ratingsCount ? 'review' : ''}  </p>
                 </div>
@@ -44,21 +47,18 @@ function renderContent(data){
         </div>
         `
     });
-    
-    bookDatabase.forEach((item, i) =>{
-        if(item.volumeInfo.averageRating){
-            let cardRating = document.querySelectorAll('.book-card__rating');
-            let average = document.createElement('div');
-            average.classList.add('book-card__star');
-            let averageElement = document.querySelectorAll('book-card__star')
-            if(!averageElement[i]){
-                for(let index = 1; index <= item.volumeInfo.averageRating; index++){
-                    average.textContent += `☆`;
-                };
-                cardRating[i].prepend(average);
-            };
-        };
-    })
+
+    function generateStars(average) {
+        if (average) {
+            let stars = '';
+            for (let i = 1; i <= average; i++) {
+                stars += '☆';
+            }
+            return stars;
+        } else {
+            return '';
+        }
+    };
 
     const btnBuy = document.querySelectorAll('.book-card__button');
     addingToTheCart(btnBuy, bookDatabase);
@@ -96,7 +96,7 @@ function filteringBooks(storedData, arr, id, key){
     arr = JSON.parse(storedData);
     let newArrBook = arr.filter(item => item.id ? item.id !== id : item !== id); 
     localStorage.setItem(key, JSON.stringify(newArrBook));
-}
+};
 
 function addingToTheCart(btnBuy, book){
     btnBuy.forEach((button, i) =>{
@@ -144,7 +144,8 @@ function loadingBooks(category){
                 category = item.dataset.category;
             }
         })
-        requestingData(category);
+        indexStart = JSON.parse(localStorage.getItem('index'));
+        requestingData(category, indexStart);
     });
 };
 
@@ -161,11 +162,12 @@ function choosingACategory(){
             item.classList.add('book-list__button_active');
             item.parentElement.classList.add('active');
             category = item.dataset.category;
+            bookDatabase = [];
             parentContainer.innerHTML = '';
             requestingData(category);
         });
     });
-}
+};
 
 export default function displayingContent(){
     choosingACategory();

@@ -70,6 +70,12 @@
     background: #4C3DB2;
 }
 
+@media (max-width: 1240px){
+    .book-list__menu ul{
+        padding-left: 15%;
+    }
+}
+
 @media (max-width: 1024px){
     .book-list__menu{
         width: 316px;
