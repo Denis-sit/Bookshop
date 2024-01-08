@@ -21,7 +21,7 @@ function requestingData(category){
 function hidingTheBlock(){
     containerPurchaseCounter.style.display = 'block';
     containerPurchaseCounter.textContent = purchaseCounter;
-}
+};
 
 function renderContent(data){
     bookDatabase = bookDatabase.concat(data);
@@ -47,7 +47,7 @@ function renderContent(data){
         </div>
         `
     });
-    
+
     function generateStars(average) {
         if (average) {
             let stars = '';
@@ -96,7 +96,7 @@ function filteringBooks(storedData, arr, id, key){
     arr = JSON.parse(storedData);
     let newArrBook = arr.filter(item => item.id ? item.id !== id : item !== id); 
     localStorage.setItem(key, JSON.stringify(newArrBook));
-}
+};
 
 function addingToTheCart(btnBuy, book){
     btnBuy.forEach((button, i) =>{
@@ -166,7 +166,7 @@ function choosingACategory(){
             requestingData(category);
         });
     });
-}
+};
 
 export default function displayingContent(){
     choosingACategory();
