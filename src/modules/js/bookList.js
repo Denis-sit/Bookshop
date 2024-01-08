@@ -162,6 +162,7 @@ function choosingACategory(){
             item.classList.add('book-list__button_active');
             item.parentElement.classList.add('active');
             category = item.dataset.category;
+            bookDatabase = [];
             parentContainer.innerHTML = '';
             requestingData(category);
         });
